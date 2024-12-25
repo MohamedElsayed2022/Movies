@@ -21,7 +21,11 @@ const MoviesList = ({ getPage , pageCount }) => {
             return( <CardMovie key={mov.id} mov={mov}/>
             )
         })):<h2 className='text-center p-2'>لايوجد افلام </h2>}
-     <Pagination getPage={getPage} pageCount={pageCount}/>
+        {
+          pageCount >=2 ? (
+            <Pagination getPage={getPage} pageCount={pageCount}/>
+          ) :(null)
+        }
 
       
 
