@@ -1,23 +1,30 @@
-import logo from './logo.svg';
-import './App.css';
+import Navbar from "./components/Navbar";
+import MoviesList from "./components/MoviesList";
+import { Container } from "react-bootstrap";
+import { useEffect, useState } from "react";
+import axios from "axios";
+import Pagination from "./components/Pagination";
+import { BrowserRouter, Route, Router, Routes } from "react-router-dom";
+import MovieDetails from "./components/MovieDetails";
+import { useDispatch, useSelector } from "react-redux";
+import { getMoviesPages } from "./Redux/Actions/Actions";
 
 function App() {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getMoviesPages());
+  }, []);
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="font color-body">
+      <Navbar />
+      <Container>
+        <BrowserRouter>
+          <Routes>
+            <Route path="/" element={<MoviesList />} />
+            <Route path="/movie/:id" element={<MovieDetails />} />
+          </Routes>
+        </BrowserRouter>
+      </Container>
     </div>
   );
 }
